@@ -5,7 +5,9 @@
     <title>My View</title>
 </head>
 <body>
-    <h1 th:text="${Data.id}"></h1>
-    <p th:text="${Data.title}"></p>
+    <ul th:each="Data : ${Data}">
+        <li th:text="${Data.id}"></li>
+        <li th:text="${Data.title}"></li>
+    </ul>
 </body>
 </html>

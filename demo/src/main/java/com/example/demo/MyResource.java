@@ -1,6 +1,13 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.annotation.JsonTypeId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.json.simple.JSONArray;
+
+@Data
 public class MyResource {
+
     private Integer id;
 
     private String title;
