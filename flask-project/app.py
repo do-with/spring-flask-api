@@ -1,5 +1,8 @@
 from flask import Flask,Response,jsonify
 from soup import title_check
+from title import notice_check
+from title import notice_link
+
 from flask_restful import Api, Resource
 import requests 
 from bs4 import BeautifulSoup
@@ -21,11 +24,24 @@ def hello():
 @app.route('/api', methods=['GET'])
 def title():
     t=[]
+    title_dict = {}
     for i,title in enumerate(title_check()):
         t.append({'id':i,'title':title.decode('utf-8')})
     print(t)
-    my_data = {'id': 'Alice', 'age': '30', 'title': 'New York'}
-    return jsonify(t[0])
+    title_dict["t"] = t
+    #my_data = {'id': 'Alice', 'age': '30', 'title': 'New York'}
+    return title_dict
+
+@app.route('/notice')
+def notice():
+    t=[]
+    title_dict = {}
+    for i,title in enumerate(notice_link()):
+        t.append({'id':i,'title':title})
+    print(t)
+    title_dict["t"] = t
+    #my_data = {'id': 'Alice', 'age': '30', 'title': 'New York'}
+    return title_dict
 
 
 if __name__ == '__main__':
