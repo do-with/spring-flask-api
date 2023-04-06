@@ -6,8 +6,10 @@
 </head>
 <body>
     <ul th:each="Data : ${Data}">
-        <li th:text="${Data.id}"></li>
-        <li th:text="${Data.title}"></li>
+        <li th:text="${Data.Contents.content}"></li>
+        <li th:text="${Data.Contents.title}"></li>
+        <li th:text="${Data.Contents.src}"></li>
+        <img th:src = "${Data.Contents.src}" />
     </ul>
 </body>
 </html>
