@@ -1,7 +1,6 @@
 from flask import Flask,Response,jsonify
 from soup import title_check
 from title import notice_check
-from title import notice_link
 
 from flask_restful import Api, Resource
 import requests 
@@ -23,25 +22,36 @@ def hello():
 
 @app.route('/api', methods=['GET'])
 def title():
-    t=[]
+    Title=[]
     title_dict = {}
     for i,title in enumerate(title_check()):
-        t.append({'id':i,'title':title.decode('utf-8')})
-    print(t)
-    title_dict["t"] = t
-    #my_data = {'id': 'Alice', 'age': '30', 'title': 'New York'}
+        Title.append({'id':i,'title':title.decode('utf-8')})
+    print(Title)
+    title_dict["Notices"] = Title
     return title_dict
 
-@app.route('/notice')
-def notice():
-    t=[]
-    title_dict = {}
-    for i,title in enumerate(notice_link()):
-        t.append({'id':i,'title':title})
-    print(t)
-    title_dict["t"] = t
+@app.route('/img', methods=['GET'])
+def noticeImg():
+    URL=[]
+    url_dict = {}
+    
+    decode_list = []
+    #for i,url in enumerate(notice_check()):
+        #URL.append({'id':i,'url':url[i]})
+    for content in notice_check():
+        decode_dict = {}
+        decode_dict['src'] = content['src'].decode('utf-8')
+        decode_dict['title'] = content['title'].decode('utf-8')
+        decode_dict['content'] = content['content'].decode('utf-8')
+        decode_list.append(decode_dict)
+
+    for i,content in enumerate(decode_list):
+        URL.append({"id":i ,"Contents":content})
+    print(URL)
+    url_dict["News"] = URL
     #my_data = {'id': 'Alice', 'age': '30', 'title': 'New York'}
-    return title_dict
+    print(url_dict)
+    return url_dict
 
 
 if __name__ == '__main__':
